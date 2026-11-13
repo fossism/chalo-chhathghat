@@ -10,6 +10,7 @@ interface ArghyaOfferingProps {
   currentDay: ChhathDay;
   onClose: () => void;
   onArghyaPoured: () => void;
+  onOpenBlessing?: () => void;
 }
 
 export const ArghyaOffering: React.FC<ArghyaOfferingProps> = ({
@@ -17,6 +18,7 @@ export const ArghyaOffering: React.FC<ArghyaOfferingProps> = ({
   currentDay,
   onClose,
   onArghyaPoured,
+  onOpenBlessing,
 }) => {
   const t = translations[lang].arghya;
   const isMorning = currentDay === 'usha-arghya';
@@ -141,9 +143,24 @@ export const ArghyaOffering: React.FC<ArghyaOfferingProps> = ({
         </div>
 
         {hasOffered && (
-          <div className="mt-4 p-3 rounded-2xl bg-gradient-to-r from-amber-600/30 to-orange-600/30 border border-amber-400 text-center text-xs md:text-sm text-amber-200 font-semibold animate-fadeIn flex items-center justify-center gap-2">
-            <Heart className="w-4 h-4 text-red-400 fill-red-400" />
-            {t.sunBlessing}
+          <div className="mt-4 flex flex-col gap-2">
+            <div className="p-3 rounded-2xl bg-gradient-to-r from-amber-600/30 to-orange-600/30 border border-amber-400 text-center text-xs md:text-sm text-amber-200 font-semibold animate-fadeIn flex items-center justify-center gap-2">
+              <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+              {t.sunBlessing}
+            </div>
+
+            {onOpenBlessing && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenBlessing();
+                }}
+                className="py-2.5 px-4 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-red-600 hover:brightness-110 text-amber-950 font-bold text-xs md:text-sm shadow-xl flex items-center justify-center gap-2 animate-pulse"
+              >
+                <Sparkles className="w-4 h-4 text-amber-950" />
+                <span>सामूहिक आशीर्वाद, चरण स्पर्श व पारण में सम्मिलित हों</span>
+              </button>
+            )}
           </div>
         )}
       </div>

@@ -19,6 +19,7 @@ import { ArghyaOffering } from '../components/ArghyaOffering';
 import { FloatDiyaModal } from '../components/FloatDiyaModal';
 import { CulturalGuideModal } from '../components/CulturalGuideModal';
 import { FolkMusicPlayer } from '../components/FolkMusicPlayer';
+import { CollectiveBlessingModal } from '../components/CollectiveBlessingModal';
 
 export const GameManager: React.FC = () => {
   // Game Day & Language
@@ -50,6 +51,7 @@ export const GameManager: React.FC = () => {
   const [isArghyaModalOpen, setIsArghyaModalOpen] = useState(false);
   const [isDiyaModalOpen, setIsDiyaModalOpen] = useState(false);
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
+  const [isBlessingModalOpen, setIsBlessingModalOpen] = useState(false);
 
   // Keyboard keys pressed state
   const keysRef = useRef<{ [key: string]: boolean }>({});
@@ -114,6 +116,7 @@ export const GameManager: React.FC = () => {
       if (e.code === 'KeyF') handleActionDiya();
       if (e.code === 'KeyR') handleActionThekua();
       if (e.code === 'KeyC') handleActionSoop();
+      if (e.code === 'KeyB') handleActionBlessing();
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -263,6 +266,10 @@ export const GameManager: React.FC = () => {
     setIsSoopModalOpen(true);
   };
 
+  const handleActionBlessing = () => {
+    setIsBlessingModalOpen(true);
+  };
+
   const handleToggleMute = () => {
     const next = !isMuted;
     setIsMuted(next);
@@ -339,6 +346,7 @@ export const GameManager: React.FC = () => {
         onActionDiya={handleActionDiya}
         onActionThekua={handleActionThekua}
         onActionSoop={handleActionSoop}
+        onActionBlessing={handleActionBlessing}
         onOpenGuide={() => setIsGuideModalOpen(true)}
         isMuted={isMuted}
         onToggleMute={handleToggleMute}
@@ -381,6 +389,7 @@ export const GameManager: React.FC = () => {
           lang={lang}
           currentDay={currentDay}
           onClose={() => setIsArghyaModalOpen(false)}
+          onOpenBlessing={() => setIsBlessingModalOpen(true)}
           onArghyaPoured={() => {
             setIsOffering(true);
             setTimeout(() => setIsOffering(false), 3500);
@@ -404,6 +413,17 @@ export const GameManager: React.FC = () => {
         <CulturalGuideModal
           lang={lang}
           onClose={() => setIsGuideModalOpen(false)}
+        />
+      )}
+
+      {isBlessingModalOpen && (
+        <CollectiveBlessingModal
+          lang={lang}
+          onClose={() => setIsBlessingModalOpen(false)}
+          onDistributeThekua={() => {
+            setThekuaCount((prev) => Math.max(0, prev - 1));
+            setNishtha((n) => Math.min(100, n + 5));
+          }}
         />
       )}
     </div>

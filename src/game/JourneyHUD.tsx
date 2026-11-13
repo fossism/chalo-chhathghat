@@ -34,6 +34,7 @@ interface JourneyHUDProps {
   onActionDiya: () => void;
   onActionThekua: () => void;
   onActionSoop: () => void;
+  onActionBlessing?: () => void;
   onOpenGuide: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
@@ -59,6 +60,7 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
   onActionDiya,
   onActionThekua,
   onActionSoop,
+  onActionBlessing,
   onOpenGuide,
   isMuted,
   onToggleMute,
@@ -392,6 +394,17 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
               <span className="text-base">🪔</span>
               <span className="text-[8px] font-bold text-amber-300">दीपदान</span>
             </button>
+
+            {onActionBlessing && (
+              <button
+                onClick={onActionBlessing}
+                className="p-2 rounded-2xl glass-panel-glow border border-amber-400/80 bg-amber-900/60 text-amber-100 hover:scale-105 active:scale-95 transition-all shadow-lg flex flex-col items-center justify-center w-12 h-12"
+                title="Collective Blessings, Charan Sparsh & Paran [B]"
+              >
+                <span className="text-base">🙏</span>
+                <span className="text-[8px] font-bold text-amber-300">आशीर्वाद</span>
+              </button>
+            )}
           </div>
 
           {/* Lower row: Shankh, Jaykara, Primary Arghya Button */}

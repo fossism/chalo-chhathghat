@@ -59,7 +59,30 @@ The ghat is not right outside your door—it is a **600-meter devotional journey
 
 ---
 
-### 4. 600m Journey HUD & Instant Waypoint Teleport
+### 4. 150+ Devotees Massive Crowd Simulation
+The ghat and the entire pilgrimage route are filled with a complete community of 150+ animated devotees:
+* **36 River Wading Vratis**: Standing waist-deep in the holy Ganges in two respectful rows, holding bamboo soops with lit diyas facing the Sun.
+* **24 Water Arghya Helpers**: Sons and family members standing beside vratis holding brass kalashes and pouring cascading milk arghya streams.
+* **70+ Devotees on Ghat Steps**:
+  - **Dada ji (Elder Grandfathers)**: In khadi kurtas, dhotis, and grey woollen shawls with folded hands.
+  - **Dadi ji (Elder Grandmothers)**: In white/cream cotton sarees with orange sindoor, singing traditional Chhath geet.
+  - **Excited Children**: Kids wearing colorful kurtas holding sparkling phuljhadis (sparklers) with dynamic point lights.
+  - **Daura Bearer Men**: Carrying filled bamboo baskets on their heads.
+  - **Women in Festive Sarees**: Draped in crimson, marigold, and saffron sarees with orange matiya sindoor.
+* **30+ Procession Marchers**: Devotees continuously walking along the sandy trail toward the riverbank.
+
+---
+
+### 5. Universal Blessings, Charan Sparsh & Paran Ceremony
+An interactive ceremony capturing the deep emotional culmination of the festival:
+* **Charan Sparsh (Touching Feet of Elders & Vratis)**: Devotees touch the feet of the fasting Vrati mother, Dada ji, and Dadi ji to receive heartfelt Bhojpuri blessings (*"जुग जुग जिया बबुआ! छठी मइया तोहार सब मनोरथ सिद्ध करसु!"*).
+* **Matiya Sindoor Daan**: Married women apply deep orange vermilion from the tip of the nose up to the parting of the hairline on each other.
+* **Mahaprasad Thekua Sharing**: Distributing freshly made ghee thekua to 100+ devotees gathered on the ghat.
+* **Paran (Breaking Fast)**: Concluding the 36-hour waterless fast with sacred Gangajal and raw cow milk.
+
+---
+
+### 6. 600m Journey HUD & Instant Waypoint Teleport
 * **Live Distance Progress Bar**: Shows exactly how many meters you have walked from `0m` to `600m`.
 * **5 Quick Teleport Waypoint Buttons**:
   - `[0m: Home (घर का आंगन)]`
@@ -81,7 +104,7 @@ The ghat is not right outside your door—it is a **600-meter devotional journey
 * **3D Rendering**: Three.js, React Three Fiber, React Three Drei
 * **Shaders & Reflections**: MeshReflectorMaterial, MeshToonMaterial with procedural cel-shading gradient maps
 * **Frontend**: React 18, TypeScript, Vite, Tailwind CSS
-* **Audio**: Web Audio API Procedural Synthesizer (Shankhnaad, temple bells, dholak beats, tanpura drone)
+* **Audio**: Web Audio API Procedural Synthesizer (Shankhnaad, temple bells, blessing chimes, dholak beats, tanpura drone)
 
 ---
 
@@ -97,5 +120,3 @@ npm run dev
 # Build for production
 npm run build
 ```
-
-Open `http://127.0.0.1:5173/` in your browser to experience the 600m pilgrimage.

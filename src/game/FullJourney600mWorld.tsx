@@ -15,6 +15,7 @@ import {
   RiverFloatingDiyasField,
 } from './AuthenticChhathGhatDecor';
 import { ArghyaFamilyHelper, SingingWomenCircle } from './GhatCrowdMembers';
+import { MassiveChhathCrowd } from './MassiveChhathCrowd';
 
 export type CameraPreset = 'cinematic_tour' | 'home' | 'village' | 'bazaar' | 'riverbank' | 'ghat' | 'player_follow';
 
@@ -445,6 +446,9 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
         {/* Dense Field of 28+ Floating Marigold Diyas on the River */}
         <RiverFloatingDiyasField riverZ={0} />
       </group>
+
+      {/* 100-200 DEVOTEES CROWD: 36 Water Vratis, 24 Milk Helpers, Dada, Dadi, Kids with Sparklers, Procession */}
+      <MassiveChhathCrowd isOffering={isOffering} currentDay={currentDay} />
 
       {/* The Anime Vrati standing in the river offering Arghya (Z = 278) */}
       <AnimeVrati position={[0, -0.28, 278]} isOffering={isOffering} />
