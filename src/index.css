@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0704;
+  font-family: 'Baloo 2', system-ui, -apple-system, sans-serif;
+  color: #fef3c7;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.font-rozha {
+  font-family: 'Rozha One', 'Baloo 2', serif;
+}
+
+.font-yatra {
+  font-family: 'Yatra One', 'Baloo 2', cursive;
+}
+
+/* Glassmorphism accents */
+.glass-panel {
+  background: rgba(22, 13, 8, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-card {
+  background: rgba(30, 18, 11, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.glass-panel-glow {
+  background: rgba(26, 14, 7, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+}
+
+/* Custom glow animations */
+@keyframes flicker {
+  0%, 100% { opacity: 0.95; filter: drop-shadow(0 0 6px #f59e0b); }
+  25% { opacity: 0.8; filter: drop-shadow(0 0 3px #ea580c); }
+  50% { opacity: 1; filter: drop-shadow(0 0 10px #fbbf24); }
+  75% { opacity: 0.85; filter: drop-shadow(0 0 5px #f97316); }
+}
+
+.animate-diya {
+  animation: flicker 2s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #140d08;
+}
+::-webkit-scrollbar-thumb {
+  background: #78350f;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b45309;
+}
