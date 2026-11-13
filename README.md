@@ -1,11 +1,11 @@
-# Chalo Chhath Ghat (चलो छठ घाट) 🪔
+# Chalo Chhath Ghat (चलो छठ घाट)
 ### 600-Meter Pilgrimage Journey — Anime Aesthetic & Realistic Showcase
 
 An online, real-time 3D browser pilgrimage and crowd game capturing the authentic soul of **Chhath Puja Mahaparv** from the village ancestral home to the holy Ganges.
 
 ---
 
-## 🌟 What Was Upgraded & Implemented
+## Overview
 
 ### 1. The Full 600-Meter Pilgrimage Route (घर से गंगा घाट तक)
 The ghat is not right outside your door—it is a **600-meter devotional journey** through 5 distinct living zones:
@@ -31,11 +31,11 @@ The ghat is not right outside your door—it is a **600-meter devotional journey
   - Multi-tiered red sandstone steps descending into the water.
   - 5-sugarcane *Kosi* canopies with terracotta elephants (*Kosi Haathi*) and burning oil lamps.
   - The Holy Ganges river with real-time mirror reflections (`MeshReflectorMaterial`).
-  - Devotees standing waist-deep in water offering holy Arghya to the blazing sun!
+  - Devotees standing waist-deep in water offering holy Arghya to the blazing sun.
 
 ---
 
-### 2. Studio Ghibli / Makoto Shinkai Anime-Style People (No Boxes!)
+### 2. Studio Ghibli / Makoto Shinkai Anime-Style People
 * **Anime Vrati (Heroine Devotee)**:
   - Natural anime human anatomy: expressive eyes with specular highlights, tapered jawline, styled dark hair with marigolds.
   - Draped cotton-silk *Piliya* saree with crimson borders and golden zari embroidery.
@@ -62,20 +62,40 @@ The ghat is not right outside your door—it is a **600-meter devotional journey
 ### 4. 600m Journey HUD & Instant Waypoint Teleport
 * **Live Distance Progress Bar**: Shows exactly how many meters you have walked from `0m` to `600m`.
 * **5 Quick Teleport Waypoint Buttons**:
-  - `[0m: घर (Home)]`
-  - `[150m: पगडंडी (Alley)]`
-  - `[320m: बाजार (Bazaar)]`
-  - `[480m: कछार (Trail)]`
-  - `[600m: गंगा घाट (Ghat)]`
+  - `[0m: Home (घर का आंगन)]`
+  - `[150m: Alley (गाँव की पगडंडी)]`
+  - `[320m: Bazaar (तोरण द्वार व बाजार)]`
+  - `[480m: Trail (रेत व बालू का कछार)]`
+  - `[600m: Ghat (महा पावन गंगा घाट)]`
 * **Showcase Camera Views**:
-  - 🎥 600m Drone Pilgrimage Tour
-  - ☀️ Surya Arghya Ghat Close-up
-  - 🏠 Ancestral Home Courtyard View
-  - 🎪 Festive Bazaar Arch View
-  - 🕹️ Interactive WASD / Joystick Free Walk Mode
+  - 600m Drone Pilgrimage Tour
+  - Surya Arghya Ghat Close-up
+  - Ancestral Home Courtyard View
+  - Festive Bazaar Arch View
+  - Interactive WASD / Joystick Free Walk Mode
 
 ---
 
-## 🚀 Play & View Live
+## Tech Stack
 
-Open **`http://127.0.0.1:5173/`** in your browser to experience the 600m pilgrimage!
+* **3D Rendering**: Three.js, React Three Fiber, React Three Drei
+* **Shaders & Reflections**: MeshReflectorMaterial, MeshToonMaterial with procedural cel-shading gradient maps
+* **Frontend**: React 18, TypeScript, Vite, Tailwind CSS
+* **Audio**: Web Audio API Procedural Synthesizer (Shankhnaad, temple bells, dholak beats, tanpura drone)
+
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+Open `http://127.0.0.1:5173/` in your browser to experience the 600m pilgrimage.
