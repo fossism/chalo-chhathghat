@@ -324,6 +324,11 @@ export const GameManager: React.FC = () => {
           collectibles={collectibles}
           diyas={diyas}
           cameraPreset={cameraPreset}
+          onUserOrbit={() => {
+            if (cameraPreset === 'cinematic_tour') {
+              setCameraPreset('player_follow');
+            }
+          }}
         />
       </Canvas>
 

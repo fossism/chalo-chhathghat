@@ -90,7 +90,10 @@ An interactive ceremony capturing the deep emotional culmination of the festival
   - `[320m: Bazaar (तोरण द्वार व बाजार)]`
   - `[480m: Trail (रेत व बालू का कछार)]`
   - `[600m: Ghat (महा पावन गंगा घाट)]`
-* **Showcase Camera Views**:
+* **Showcase Camera Views & 360-Degree Cursor Orbit**:
+  - Full 360-degree rotation around any scene element via mouse click-and-drag or touch drag.
+  - Smooth scroll-wheel zoom in and out.
+  - Camera preserves custom user rotation angle as the character walks forward.
   - 600m Drone Pilgrimage Tour
   - Surya Arghya Ghat Close-up
   - Ancestral Home Courtyard View

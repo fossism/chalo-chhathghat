@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { Stars, Float, Sparkles, MeshReflectorMaterial } from '@react-three/drei';
+import { Stars, Float, Sparkles, MeshReflectorMaterial, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { ChhathDay, FloatingDiya, KafilaMember, VillagerNPC, CollectibleItem } from '../types';
 import { animeTexGen } from '../utils/animeTextures';
@@ -30,6 +30,7 @@ interface FullJourney600mWorldProps {
   collectibles: CollectibleItem[];
   diyas: FloatingDiya[];
   cameraPreset: CameraPreset;
+  onUserOrbit?: () => void;
 }
 
 // Ancestral Village Brick House with Khaprail Roof & Tulsi Chaura
@@ -171,65 +172,104 @@ const BazaarStalls: React.FC<{ position: [number, number, number] }> = ({ positi
   );
 };
 
-// Camera Controller
+// Interactive 360-Degree Camera Controller with Cursor OrbitControls
 const JourneyCameraController: React.FC<{
   cameraPreset: CameraPreset;
   playerPos: { x: number; y: number; z: number; rotY: number };
-}> = ({ cameraPreset, playerPos }) => {
+  isWalking: boolean;
+  onUserOrbit?: () => void;
+}> = ({ cameraPreset, playerPos, isWalking, onUserOrbit }) => {
   const { camera } = useThree();
+  const controlsRef = useRef<any>(null);
+  const isDraggingRef = useRef(false);
+  const lastPlayerPos = useRef(new THREE.Vector3(playerPos.x, playerPos.y, playerPos.z));
+
+  // Smooth preset waypoint transitions
+  useEffect(() => {
+    if (!controlsRef.current) return;
+    const controls = controlsRef.current;
+
+    if (cameraPreset === 'home') {
+      controls.target.set(0, 1.8, -280);
+      camera.position.set(8, 5.5, -265);
+    } else if (cameraPreset === 'village') {
+      controls.target.set(0, 1.8, -135);
+      camera.position.set(7, 4.5, -120);
+    } else if (cameraPreset === 'bazaar') {
+      controls.target.set(0, 2.5, 30);
+      camera.position.set(9, 5.5, 15);
+    } else if (cameraPreset === 'riverbank') {
+      controls.target.set(0, 1.8, 190);
+      camera.position.set(-8, 5, 175);
+    } else if (cameraPreset === 'ghat') {
+      controls.target.set(0, 1.2, 276);
+      camera.position.set(2.5, 3.2, 288);
+    }
+  }, [cameraPreset, camera]);
 
   useFrame((state) => {
-    switch (cameraPreset) {
-      case 'cinematic_tour': {
-        const t = state.clock.elapsedTime * 0.15;
-        const sweepZ = -150 + Math.sin(t) * 350;
-        const sweepX = Math.sin(t * 1.5) * 14;
-        const sweepY = 7.5 + Math.cos(t) * 3;
-        camera.position.lerp(new THREE.Vector3(sweepX, sweepY, sweepZ - 14), 0.04);
-        camera.lookAt(0, 2.0, sweepZ + 25);
-        break;
-      }
-      case 'home': {
-        camera.position.lerp(new THREE.Vector3(8, 6, -270), 0.06);
-        camera.lookAt(0, 2, -290);
-        break;
-      }
-      case 'village': {
-        camera.position.lerp(new THREE.Vector3(6, 4.5, -130), 0.06);
-        camera.lookAt(0, 1.8, -150);
-        break;
-      }
-      case 'bazaar': {
-        camera.position.lerp(new THREE.Vector3(10, 6, 40), 0.06);
-        camera.lookAt(0, 3, 20);
-        break;
-      }
-      case 'riverbank': {
-        camera.position.lerp(new THREE.Vector3(-8, 5, 170), 0.06);
-        camera.lookAt(0, 2, 200);
-        break;
-      }
-      case 'ghat': {
-        // Intimate view facing the Vrati and the rising/setting sun
-        camera.position.lerp(new THREE.Vector3(3.5, 3.0, 290), 0.06);
-        camera.lookAt(0, 1.5, 275);
-        break;
-      }
-      case 'player_follow':
-      default: {
-        const dist = 7.5;
-        const height = 4.8;
-        const camX = playerPos.x - Math.sin(playerPos.rotY) * dist;
-        const camZ = playerPos.z - Math.cos(playerPos.rotY) * dist;
-        const camY = playerPos.y + height;
-        camera.position.lerp(new THREE.Vector3(camX, camY, camZ), 0.08);
-        camera.lookAt(playerPos.x, playerPos.y + 1.6, playerPos.z);
-        break;
-      }
+    if (!controlsRef.current) return;
+    const controls = controlsRef.current;
+
+    // Cinematic Tour auto-drone flight when user is not manually orbiting
+    if (cameraPreset === 'cinematic_tour' && !isDraggingRef.current) {
+      const t = state.clock.elapsedTime * 0.15;
+      const sweepZ = -150 + Math.sin(t) * 350;
+      const sweepX = Math.sin(t * 1.5) * 14;
+      const sweepY = 7.5 + Math.cos(t) * 3;
+      camera.position.lerp(new THREE.Vector3(sweepX, sweepY, sweepZ - 14), 0.04);
+      controls.target.lerp(new THREE.Vector3(0, 2.0, sweepZ + 25), 0.05);
+      controls.update();
+      lastPlayerPos.current.set(playerPos.x, playerPos.y, playerPos.z);
+      return;
     }
+
+    // Player Follow mode or walking: camera target tracks player, preserving user cursor orbit angle!
+    if (cameraPreset === 'player_follow' || isWalking) {
+      const targetPos = new THREE.Vector3(playerPos.x, playerPos.y + 1.6, playerPos.z);
+      const currentPos = new THREE.Vector3(playerPos.x, playerPos.y, playerPos.z);
+      const deltaPos = currentPos.clone().sub(lastPlayerPos.current);
+
+      if (deltaPos.lengthSq() > 25) {
+        // Player teleported: snap camera and target directly behind player
+        controls.target.copy(targetPos);
+        camera.position.set(playerPos.x, playerPos.y + 4.5, playerPos.z - 7.5);
+      } else if (deltaPos.lengthSq() > 0.000001) {
+        // Player walked: move camera and target equally to maintain custom cursor orbit angle
+        camera.position.add(deltaPos);
+        controls.target.add(deltaPos);
+      } else if (!isDraggingRef.current) {
+        // Standing still: gently center target on player
+        controls.target.lerp(targetPos, 0.1);
+      }
+
+      lastPlayerPos.current.copy(currentPos);
+    }
+
+    controls.update();
   });
 
-  return null;
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enableDamping
+      dampingFactor={0.07}
+      rotateSpeed={0.85}
+      zoomSpeed={1.0}
+      panSpeed={0.8}
+      minDistance={2.0}
+      maxDistance={70.0}
+      minPolarAngle={0.05}
+      maxPolarAngle={Math.PI / 2 - 0.04}
+      onStart={() => {
+        isDraggingRef.current = true;
+        if (onUserOrbit) onUserOrbit();
+      }}
+      onEnd={() => {
+        isDraggingRef.current = false;
+      }}
+    />
+  );
 };
 
 export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
@@ -239,6 +279,7 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
   isOffering,
   currentDay,
   cameraPreset,
+  onUserOrbit,
 }) => {
   const toonGradient = useMemo(() => animeTexGen.getToonGradientMap(), []);
 
@@ -255,8 +296,13 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
 
   return (
     <>
-      {/* Camera Controller */}
-      <JourneyCameraController cameraPreset={cameraPreset} playerPos={playerPos} />
+      {/* 360-Degree Interactive Cursor Orbit Camera Controller */}
+      <JourneyCameraController
+        cameraPreset={cameraPreset}
+        playerPos={playerPos}
+        isWalking={isWalking}
+        onUserOrbit={onUserOrbit}
+      />
 
       {/* Anime Sky & Lighting */}
       <ambientLight intensity={isNight ? 0.35 : 0.9} color={isNight ? '#0b132b' : '#fff3b0'} />

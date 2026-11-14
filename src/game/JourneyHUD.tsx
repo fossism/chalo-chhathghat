@@ -309,6 +309,10 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
               🕹️ स्वतंत्र चाल (Walk)
             </button>
           </div>
+          <div className="mt-2 pt-1.5 border-t border-amber-500/30 text-[10px] text-amber-300 font-medium flex items-center gap-1.5">
+            <Compass className="w-3.5 h-3.5 text-amber-400 animate-spin [animation-duration:12s]" />
+            <span>3D घुमाव: कर्सर ड्रैग करें</span>
+          </div>
         </div>
       </div>
 
