@@ -385,6 +385,92 @@ class AudioEngine {
     noise.start();
   }
 
+  // Firecracker Sparkle / Phuljhari Sizzle
+  public playCrackerSparkle() {
+    if (this.isMuted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const bufferSize = this.ctx.sampleRate * 0.4;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (this.ctx.sampleRate * 0.15));
+    }
+
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(3200, this.ctx.currentTime);
+    filter.Q.setValueAtTime(2.5, this.ctx.currentTime);
+
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.38);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.ctx.destination);
+    noise.start();
+  }
+
+  // Skyrocket Fireworks Launch Whistle & Aerial Explosion Boom
+  public playFireworkBurst() {
+    if (this.isMuted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+
+    // 1. Launch Whistle
+    const osc = this.ctx.createOscillator();
+    const oscGain = this.ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(450, t);
+    osc.frequency.exponentialRampToValueAtTime(1400, t + 0.3);
+    oscGain.gain.setValueAtTime(0.05, t);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+    osc.connect(oscGain);
+    oscGain.connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.33);
+
+    // 2. Explosion Boom (deep thud) after 0.35s
+    const boomOsc = this.ctx.createOscillator();
+    const boomGain = this.ctx.createGain();
+    boomOsc.type = 'sine';
+    boomOsc.frequency.setValueAtTime(140, t + 0.32);
+    boomOsc.frequency.exponentialRampToValueAtTime(35, t + 1.2);
+    boomGain.gain.setValueAtTime(0.28, t + 0.32);
+    boomGain.gain.exponentialRampToValueAtTime(0.001, t + 1.4);
+    boomOsc.connect(boomGain);
+    boomGain.connect(this.ctx.destination);
+    boomOsc.start(t + 0.32);
+    boomOsc.stop(t + 1.45);
+
+    // 3. Crackling embers
+    const bufferSize = Math.floor(this.ctx.sampleRate * 0.9);
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (this.ctx.sampleRate * 0.3));
+    }
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1800, t + 0.34);
+    const noiseGain = this.ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.18, t + 0.34);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 1.2);
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(this.ctx.destination);
+    noise.start(t + 0.34);
+  }
+
   // Tanpura Ambient Drone
   public toggleAmbient() {
     if (this.isAmbientPlaying) {

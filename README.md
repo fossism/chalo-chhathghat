@@ -70,14 +70,45 @@ The pilgrimage and ghat are filled with a complete community of devotees celebra
 * **Continuous 600m Marching Pilgrims**:
   - Over 45 pilgrims distributed from 0m Home, Village Basti, Festive Bazaar, and Sandy Trail continuously walk in dynamic motion toward the Ganga Ghat.
   - Never frozen or static; each pilgrim walks with natural biomechanical stride and body bobbing, seamlessly continuing their pilgrimage.
+* **Seated Devotee Circles on Ghat Steps (बैठे हुए श्रद्धालु व परिजन)**:
+  - **Women Bhajan Mandali**: Seated cross-legged in circles on jute carpets singing traditional Chhath songs around brass offering thalis.
+  - **Elders Gathering**: Grandfathers and uncles sitting wrapped in shawls on blankets, drinking tea from terracotta kulhads and conversing.
+  - **Cousins & Kids Guarding Dauras**: Seated along the stone steps, watching over fresh bamboo baskets and sugarcane canopies.
+  - **Vratis in Dhyana**: Seated in quiet prayer near the water edge before stepping into the sacred river.
+* **Dynamic Wandering & Strolling People (घूमते-टहलते श्रद्धालु)**:
+  - Devotees strolling along the ghat promenade, greeting relatives with folded hands.
+  - Mobile tea vendor (Chai-wallah) carrying a brass kettle serving hot tea.
+  - Youngsters taking scenic photographs of the sunset and sunrise across the Ganges.
 * **36 River Wading Vratis**: Standing waist-deep in the holy Ganges in two respectful rows, holding bamboo soops with lit diyas facing the Sun.
 * **24 Water Arghya Helpers**: Sons and family members standing beside vratis holding brass kalashes and pouring cascading milk arghya streams.
-* **70+ Devotees on Ghat Steps**:
-  - Devotees on steps with brass thalis, kids waving sparklers, and women singing in chorus.
 
 ---
 
-### 5. Universal Blessings, Charan Sparsh & Paran Ceremony
+### 5. Firecrackers, Sparklers & Skyrocket Celebrations (पटाखे, फुलझड़ी व आतिशबाजी)
+Authentic festive atmosphere capturing the joyous sound and light of the riverbanks:
+* **Handheld Phuljhari (फुलझड़ी)**: Children and youngsters waving sparklers in hand with glittering particle trails and warm point lights.
+* **Terracotta Anaar Fountains (अनार)**: Ground fountain cones shooting sparkling golden-silver sprays 4 meters high into the air.
+* **Ground Chakris (चकरी)**: Rapidly spinning wheel fireworks casting radial sparkling rings on the sandstone steps.
+* **Aerial Skyrocket Fireworks (आसमानी रॉकेट)**: Continuous rockets launching high into the sky over the Ganges (Z: 280 to 330), bursting into expansive multi-colored spherical starbursts (crimson, emerald, gold, cyan) with synthesized whistling launch and explosion audio.
+* **Interactive Launch [Key P]**: Devotees can launch aerial skyrockets anytime from the HUD or keyboard shortcut.
+
+---
+
+### 6. Celestial Sun & Real-time Arghya Time Selection (संध्या व उषा अर्घ्य)
+Dedicated time switcher to experience both divine rituals with accurate atmospheric lighting:
+* **Sandhya Arghya (Dhalti Surya / Sunset)**:
+  - Deep crimson-gold setting sun resting right on the Ganges horizon (Y: 11, Z: 335).
+  - Warm evening twilight sky with long golden specular reflection trail across the river.
+  - Amber sunset illumination bathing devotees and ghat steps.
+* **Usha Arghya (Ugte Surya / Sunrise)**:
+  - Radiant golden morning sun rising above the river (Y: 19, Z: 335).
+  - Twelve sacred sunbeams (द्वादश सूर्य रश्मि) emanating outward with pulsating solar corona.
+  - Morning river mist (kuhaasa) with diamond glimmer reflections on the sacred waters.
+* **Instant Toggle [Key T]**: Smoothly switch between Sandhya Arghya and Usha Arghya with one click.
+
+---
+
+### 7. Universal Blessings, Charan Sparsh & Paran Ceremony
 An interactive ceremony capturing the deep emotional culmination of the festival:
 * **Charan Sparsh (Touching Feet of Elders & Vratis)**: Devotees touch the feet of the fasting Vrati mother, Dada ji, and Dadi ji to receive heartfelt Bhojpuri blessings (*"जुग जुग जिया बबुआ! छठी मइया तोहार सब मनोरथ सिद्ध करसु!"*).
 * **Matiya Sindoor Daan**: Married women apply deep orange vermilion from the tip of the nose up to the parting of the hairline on each other.
@@ -86,7 +117,7 @@ An interactive ceremony capturing the deep emotional culmination of the festival
 
 ---
 
-### 6. 600m Journey HUD & Instant Waypoint Teleport
+### 8. 600m Journey HUD & Instant Waypoint Teleport
 * **Live Distance Progress Bar**: Shows exactly how many meters you have walked from `0m` to `600m`.
 * **5 Quick Teleport Waypoint Buttons**:
   - `[0m: Home (घर का आंगन)]`

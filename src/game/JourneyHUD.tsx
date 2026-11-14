@@ -35,6 +35,7 @@ interface JourneyHUDProps {
   onActionThekua: () => void;
   onActionSoop: () => void;
   onActionBlessing?: () => void;
+  onActionFirework?: () => void;
   onOpenGuide: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
@@ -61,6 +62,7 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
   onActionThekua,
   onActionSoop,
   onActionBlessing,
+  onActionFirework,
   onOpenGuide,
   isMuted,
   onToggleMute,
@@ -223,6 +225,42 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
               className="p-1 rounded-lg bg-amber-950/80 border border-amber-500/40 text-amber-300"
             >
               {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Arghya Time Selection: Sandhya Arghya (Sunset) vs Usha Arghya (Sunrise) */}
+        <div className="pointer-events-auto flex items-center justify-between px-3.5 py-1.5 rounded-2xl bg-black/60 border border-amber-500/50 shadow-xl backdrop-blur-md">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-amber-200">
+            <span className="text-sm">☀️</span>
+            <span className="hidden sm:inline">अर्घ्य समय (Arghya Time):</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onSelectDay('sandhya-arghya')}
+              className={`px-3 py-1 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all shadow ${
+                currentDay === 'sandhya-arghya'
+                  ? 'bg-gradient-to-r from-red-600 via-orange-500 to-amber-500 text-amber-950 scale-105 ring-2 ring-amber-300'
+                  : 'bg-stone-900/80 hover:bg-stone-800 text-amber-200/80'
+              }`}
+              title="Sandhya Arghya: Setting Sun / Sunset [T]"
+            >
+              <span>🌅</span>
+              <span>संध्या अर्घ्य (Sunset)</span>
+            </button>
+
+            <button
+              onClick={() => onSelectDay('usha-arghya')}
+              className={`px-3 py-1 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all shadow ${
+                currentDay === 'usha-arghya'
+                  ? 'bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 text-amber-950 scale-105 ring-2 ring-amber-300'
+                  : 'bg-stone-900/80 hover:bg-stone-800 text-amber-200/80'
+              }`}
+              title="Usha Arghya: Rising Morning Sun / Dawn [T]"
+            >
+              <span>🌄</span>
+              <span>उषा अर्घ्य (Sunrise)</span>
             </button>
           </div>
         </div>
@@ -407,6 +445,17 @@ export const JourneyHUD: React.FC<JourneyHUDProps> = ({
               >
                 <span className="text-base">🙏</span>
                 <span className="text-[8px] font-bold text-amber-300">आशीर्वाद</span>
+              </button>
+            )}
+
+            {onActionFirework && (
+              <button
+                onClick={onActionFirework}
+                className="p-2 rounded-2xl glass-panel-glow border border-amber-400/80 bg-red-950/70 text-amber-100 hover:scale-105 active:scale-95 transition-all shadow-lg flex flex-col items-center justify-center w-12 h-12"
+                title="Launch Aerial Skyrocket & Fireworks [P]"
+              >
+                <span className="text-base">🎆</span>
+                <span className="text-[8px] font-bold text-amber-300">पटाखा [P]</span>
               </button>
             )}
           </div>

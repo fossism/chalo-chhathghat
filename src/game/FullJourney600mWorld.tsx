@@ -18,6 +18,8 @@ import { ArghyaFamilyHelper, SingingWomenCircle } from './GhatCrowdMembers';
 import { MassiveChhathCrowd } from './MassiveChhathCrowd';
 import { FamilyKafilaProcession } from './FamilyKafilaProcession';
 import { Continuous600mProcession } from './Continuous600mProcession';
+import { GhatCrackersAndFireworks } from './GhatCrackersAndFireworks';
+import { SeatedAndWanderingDevotees } from './SeatedAndWanderingDevotees';
 
 export type CameraPreset = 'cinematic_tour' | 'home' | 'village' | 'bazaar' | 'riverbank' | 'ghat' | 'player_follow';
 
@@ -33,6 +35,7 @@ interface FullJourney600mWorldProps {
   diyas: FloatingDiya[];
   cameraPreset: CameraPreset;
   onUserOrbit?: () => void;
+  manualBurstCount?: number;
 }
 
 // Ancestral Village Brick House with Khaprail Roof & Tulsi Chaura
@@ -282,6 +285,7 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
   currentDay,
   cameraPreset,
   onUserOrbit,
+  manualBurstCount = 0,
 }) => {
   const toonGradient = useMemo(() => animeTexGen.getToonGradientMap(), []);
 
@@ -289,12 +293,15 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
   const isDawn = currentDay === 'usha-arghya';
   const isDusk = currentDay === 'sandhya-arghya';
 
-  const sunColor = isDusk ? '#ff3f00' : isDawn ? '#ff6f00' : '#ffd000';
+  // Sandhya Arghya (Dusk): Warm crimson-gold setting sun on river horizon
+  // Usha Arghya (Dawn): Radiant golden morning sun rising above the river
+  const sunColor = isDusk ? '#ff3800' : isDawn ? '#ffea00' : '#ffd000';
+  const sunCoronaColor = isDusk ? '#ff7b00' : isDawn ? '#ff9e00' : '#ffe6a7';
   const sunPos = isDusk
-    ? ([0, 14, 380] as [number, number, number])
+    ? ([0, 11, 335] as [number, number, number])
     : isDawn
-    ? ([0, 18, 380] as [number, number, number])
-    : ([20, 45, 350] as [number, number, number]);
+    ? ([0, 19, 335] as [number, number, number])
+    : ([15, 38, 340] as [number, number, number]);
 
   return (
     <>
@@ -306,22 +313,59 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
         onUserOrbit={onUserOrbit}
       />
 
-      {/* Anime Sky & Lighting */}
-      <ambientLight intensity={isNight ? 0.35 : 0.9} color={isNight ? '#0b132b' : '#fff3b0'} />
-      <directionalLight position={sunPos} color={sunColor} intensity={isNight ? 0.2 : 3.2} castShadow />
+      {/* Atmospheric Ambient & Directional Sun Lighting */}
+      <ambientLight
+        intensity={isNight ? 0.35 : isDusk ? 0.95 : 1.15}
+        color={isNight ? '#0b132b' : isDusk ? '#ffd6a5' : '#fff3b0'}
+      />
+      <directionalLight
+        position={sunPos}
+        color={isDusk ? '#ff6600' : isDawn ? '#ffb703' : '#ffd000'}
+        intensity={isNight ? 0.2 : isDusk ? 3.8 : 4.5}
+        castShadow
+      />
 
-      {/* Sun Core & Corona Bloom on River Horizon */}
+      {/* SACRED CELESTIAL SUN (साक्षात भगवान भास्कर / सूर्य देव) */}
       {!isNight && (
         <group position={sunPos}>
+          {/* 1. Core Radiant Sun Orb */}
           <mesh>
-            <sphereGeometry args={[7.5, 32, 32]} />
+            <sphereGeometry args={[9.5, 32, 32]} />
             <meshBasicMaterial color={sunColor} />
           </mesh>
-          <pointLight color={sunColor} intensity={7.5} distance={150} />
+
+          {/* 2. Pulsating Solar Corona Ring */}
+          <mesh rotation={[0, 0, 0]}>
+            <ringGeometry args={[9.6, 17.5, 32]} />
+            <meshBasicMaterial color={sunCoronaColor} transparent opacity={0.65} side={THREE.DoubleSide} />
+          </mesh>
+
+          {/* 3. 12 Sacred Sun Rays (द्वादश सूर्य रश्मि) */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <mesh key={i} rotation={[0, 0, (i * Math.PI) / 6]} position={[0, 0, -0.05]}>
+              <planeGeometry args={[1.4, 38]} />
+              <meshBasicMaterial color={sunCoronaColor} transparent opacity={0.32} side={THREE.DoubleSide} />
+            </mesh>
+          ))}
+
+          {/* Sun Light Glow & Lens Flare Particles */}
+          <pointLight color={sunColor} intensity={isDusk ? 9.5 : 11.5} distance={180} />
           <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.3}>
-            <Sparkles count={80} scale={22} size={8} speed={0.3} color="#ffe6a7" />
+            <Sparkles count={120} scale={35} size={9} speed={0.3} color={isDusk ? '#ff9e00' : '#fff3b0'} />
           </Float>
         </group>
+      )}
+
+      {/* Morning Ganges River Mist & Kuhaasa during Usha Arghya */}
+      {isDawn && (
+        <Sparkles
+          count={140}
+          scale={[80, 5, 80]}
+          position={[0, 0.9, 290]}
+          size={5}
+          speed={0.25}
+          color="#ffeedd"
+        />
       )}
 
       {(isNight || isDawn) && <Stars radius={180} depth={80} count={5000} factor={4} fade />}
@@ -508,6 +552,12 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
 
       {/* 100-200 DEVOTEES CROWD: 36 Water Vratis, 24 Milk Helpers, Dada, Dadi, Kids with Sparklers, Procession */}
       <MassiveChhathCrowd isOffering={isOffering} currentDay={currentDay} />
+
+      {/* SEATED FOLKS SIPPING CHAI/SINGING & DYNAMIC WANDERING/STROLLING DEVOTEES */}
+      <SeatedAndWanderingDevotees />
+
+      {/* CELEBRATION FIREWORKS, PHULJHARI, ANAAR, CHAKRI & SKYROCKETS OVER GANGES */}
+      <GhatCrackersAndFireworks manualBurstCount={manualBurstCount} />
 
       {/* The Anime Vrati standing in the river offering Arghya (Z = 278) */}
       <AnimeVrati position={[0, -0.28, 278]} isOffering={isOffering} />

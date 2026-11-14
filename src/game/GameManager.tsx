@@ -44,6 +44,7 @@ export const GameManager: React.FC = () => {
   // Stats
   const [nishtha, setNishtha] = useState(100);
   const [thekuaCount, setThekuaCount] = useState(24);
+  const [manualBurstCount, setManualBurstCount] = useState(0);
 
   // Modals state
   const [isThekuaModalOpen, setIsThekuaModalOpen] = useState(false);
@@ -117,6 +118,8 @@ export const GameManager: React.FC = () => {
       if (e.code === 'KeyR') handleActionThekua();
       if (e.code === 'KeyC') handleActionSoop();
       if (e.code === 'KeyB') handleActionBlessing();
+      if (e.code === 'KeyP') handleActionFirework();
+      if (e.code === 'KeyT') handleToggleArghyaTime();
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -270,6 +273,16 @@ export const GameManager: React.FC = () => {
     setIsBlessingModalOpen(true);
   };
 
+  const handleActionFirework = () => {
+    setManualBurstCount((c) => c + 1);
+    audio.playFireworkBurst();
+  };
+
+  const handleToggleArghyaTime = () => {
+    setCurrentDay((prev) => (prev === 'sandhya-arghya' ? 'usha-arghya' : 'sandhya-arghya'));
+    audio.playBell();
+  };
+
   const handleToggleMute = () => {
     const next = !isMuted;
     setIsMuted(next);
@@ -294,9 +307,9 @@ export const GameManager: React.FC = () => {
             currentDay === 'kharna'
               ? '#060913'
               : currentDay === 'sandhya-arghya'
-              ? '#2a091d'
+              ? '#380c24'
               : currentDay === 'usha-arghya'
-              ? '#111538'
+              ? '#15224d'
               : '#1a1008',
           ]}
         />
@@ -304,12 +317,12 @@ export const GameManager: React.FC = () => {
           attach="fog"
           args={[
             currentDay === 'usha-arghya'
-              ? '#1c2246'
+              ? '#182654'
               : currentDay === 'sandhya-arghya'
-              ? '#3a1426'
+              ? '#3a1428'
               : '#160e0a',
-            20,
-            95,
+            35,
+            270,
           ]}
         />
 
@@ -324,6 +337,7 @@ export const GameManager: React.FC = () => {
           collectibles={collectibles}
           diyas={diyas}
           cameraPreset={cameraPreset}
+          manualBurstCount={manualBurstCount}
           onUserOrbit={() => {
             if (cameraPreset === 'cinematic_tour') {
               setCameraPreset('player_follow');
@@ -352,6 +366,7 @@ export const GameManager: React.FC = () => {
         onActionThekua={handleActionThekua}
         onActionSoop={handleActionSoop}
         onActionBlessing={handleActionBlessing}
+        onActionFirework={handleActionFirework}
         onOpenGuide={() => setIsGuideModalOpen(true)}
         isMuted={isMuted}
         onToggleMute={handleToggleMute}
