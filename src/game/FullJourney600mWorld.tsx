@@ -16,6 +16,8 @@ import {
 } from './AuthenticChhathGhatDecor';
 import { ArghyaFamilyHelper, SingingWomenCircle } from './GhatCrowdMembers';
 import { MassiveChhathCrowd } from './MassiveChhathCrowd';
+import { FamilyKafilaProcession } from './FamilyKafilaProcession';
+import { Continuous600mProcession } from './Continuous600mProcession';
 
 export type CameraPreset = 'cinematic_tour' | 'home' | 'village' | 'bazaar' | 'riverbank' | 'ghat' | 'player_follow';
 
@@ -492,6 +494,17 @@ export const FullJourney600mWorld: React.FC<FullJourney600mWorldProps> = ({
         {/* Dense Field of 28+ Floating Marigold Diyas on the River */}
         <RiverFloatingDiyasField riverZ={0} />
       </group>
+
+      {/* 45+ DYNAMIC MOVING PILGRIMS CONTINUOUSLY MARCHING TOWARDS GHAT */}
+      <Continuous600mProcession />
+
+      {/* 12+ ENTOURAGE FAMILY KAFILA (Vrati Ma, Dada, Dadi, Kids with sugarcane/thali, Dholak, Dhunuchi, Brothers) */}
+      <FamilyKafilaProcession
+        playerPos={playerPos}
+        isWalking={isWalking}
+        isInWater={isInWater}
+        isOffering={isOffering}
+      />
 
       {/* 100-200 DEVOTEES CROWD: 36 Water Vratis, 24 Milk Helpers, Dada, Dadi, Kids with Sparklers, Procession */}
       <MassiveChhathCrowd isOffering={isOffering} currentDay={currentDay} />

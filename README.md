@@ -59,17 +59,21 @@ The ghat is not right outside your door—it is a **600-meter devotional journey
 
 ---
 
-### 4. 150+ Devotees Massive Crowd Simulation
-The ghat and the entire pilgrimage route are filled with a complete community of 150+ animated devotees:
+### 4. 150+ Devotees Massive Crowd & Moving Family Kafila
+The pilgrimage and ghat are filled with a complete community of devotees celebrating together:
+* **12+ Accompanying Family Kafila (परिवार संग यात्रा)**:
+  - You are never alone when walking the 600-meter pilgrimage route or starting at home.
+  - **Vrati Mother (छठी व्रती माँ)**: Walking right alongside holding the bamboo soop with coconut, pomelo, and glowing diya.
+  - **Little Kids (छोटू व मुन्नी)**: Chintu skipping joyously carrying a miniature sugarcane stalk, and Munni in a festive ghaghra-choli with a brass flower thali.
+  - **Dada ji & Dadi ji**: Dada ji with his wooden walking stick and woollen shawl, and Dadi ji singing traditional folk melodies.
+  - **Brothers & Relatives**: Brother carrying a 5-sugarcane bundle, dholak drum player, fragrant smoking dhunuchi burner, bhabhi carrying the brass Gangajal kalash, and second daura bearer.
+* **Continuous 600m Marching Pilgrims**:
+  - Over 45 pilgrims distributed from 0m Home, Village Basti, Festive Bazaar, and Sandy Trail continuously walk in dynamic motion toward the Ganga Ghat.
+  - Never frozen or static; each pilgrim walks with natural biomechanical stride and body bobbing, seamlessly continuing their pilgrimage.
 * **36 River Wading Vratis**: Standing waist-deep in the holy Ganges in two respectful rows, holding bamboo soops with lit diyas facing the Sun.
 * **24 Water Arghya Helpers**: Sons and family members standing beside vratis holding brass kalashes and pouring cascading milk arghya streams.
 * **70+ Devotees on Ghat Steps**:
-  - **Dada ji (Elder Grandfathers)**: In khadi kurtas, dhotis, and grey woollen shawls with folded hands.
-  - **Dadi ji (Elder Grandmothers)**: In white/cream cotton sarees with orange sindoor, singing traditional Chhath geet.
-  - **Excited Children**: Kids wearing colorful kurtas holding sparkling phuljhadis (sparklers) with dynamic point lights.
-  - **Daura Bearer Men**: Carrying filled bamboo baskets on their heads.
-  - **Women in Festive Sarees**: Draped in crimson, marigold, and saffron sarees with orange matiya sindoor.
-* **30+ Procession Marchers**: Devotees continuously walking along the sandy trail toward the riverbank.
+  - Devotees on steps with brass thalis, kids waving sparklers, and women singing in chorus.
 
 ---
 
